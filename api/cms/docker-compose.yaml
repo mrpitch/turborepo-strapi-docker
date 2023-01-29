@@ -2,6 +2,7 @@ version: "3.0"
 
 services:
   postgres:
+    container_name: strapiDB
     image: 'postgres:latest'
     env_file:
       - .env
@@ -10,7 +11,8 @@ services:
       - POSTGRES_USER=${DATABASE_USERNAME}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - ./database/db_strapi_latest.sql.gz:/docker-entrypoint-initdb.d/db_strapi_latest.sql.gz
+      - db_data:/var/lib/postgresql/data/
+      #- ./database/db_strapi_latest.sql.gz:/docker-entrypoint-initdb.d/db_strapi_latest.sql.gz
     ports:
       - "5432:5432"
 
