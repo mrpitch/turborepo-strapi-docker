@@ -19,7 +19,7 @@
       "cache": false
     },
     "build:strapi": {
-      "cache": true
+      "outputs": ["dist/**"]
     },
     "start:strapi": {
       "cache": true
