@@ -1,4 +1,6 @@
 packages:
-  - "api/*"
   - "apps/*"
   - "packages/*"
+  # exclude packages that are inside test directories
+  - "api/*"
+#  - '!api/cms/*'

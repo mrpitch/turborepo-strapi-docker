@@ -4,8 +4,10 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
+    "build:strapi": "turbo run build:strapi",
     "clean": "turbo run clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "nuke": "rm -r node_modules; for d in */*/node_modules; do echo $d; rm -r $d; done"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
