@@ -23,6 +23,15 @@
     },
     "start:strapi": {
       "cache": true
+    },
+    "dev:strapi-sqlite": {
+      "cache": false
+    },
+    "build:strapi-sqlite": {
+      "outputs": ["dist/**"]
+    },
+    "start:strapi-sqlite": {
+      "cache": true
     }
   }
 }
