@@ -27,21 +27,12 @@ COPY turbo.json turbo.json
 RUN pnpm turbo run build:strapi --filter=api-cms
 
 # Don't run production as root
-# RUN addgroup --system --gid 1001 nodejs
-# RUN adduser --system --uid 1001 apicms
-# USER apicms
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 apicms
+USER apicms
 
 EXPOSE 1337
 CMD ["pnpm", "start:strapi"]
 
-# FROM node:16-alpine AS runner
-# WORKDIR /usr/src/app
-
-# # Don't run production as root
-# RUN addgroup --system --gid 1001 nodejs
-# RUN adduser --system --uid 1001 apicms
-# USER apicms
-
-# COPY --from=installer /app/api/cms/package.json .
 
 
