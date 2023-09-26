@@ -24,6 +24,9 @@
     "start:strapi": {
       "cache": true
     },
+    "start:docker-cms": {
+      "cache": true
+    },
     "dev:strapi-sqlite": {
       "cache": false
     },

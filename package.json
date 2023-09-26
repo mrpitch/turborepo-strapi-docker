@@ -10,7 +10,8 @@
     "clean": "turbo run clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "nuke": "rm -r node_modules; for d in */*/node_modules; do echo $d; rm -r $d; done",
-    "build:docker-cms": "docker build -t api-cms:v1.0 -f api/cms/Dockerfile ."
+    "build:docker-cms": "docker build -t api-cms:v1.0 -f api/cms/Dockerfile .",
+    "start:docker-cms": "docker-compose -f api/cms/docker-compose.yaml up"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
