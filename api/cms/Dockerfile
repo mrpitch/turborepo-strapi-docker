@@ -51,9 +51,10 @@ COPY --from=installer --chown=node:node /app/out/json/ .
 COPY --from=installer --chown=node:node /app/out/pnpm*.yaml ./
 RUN pnpm install --prod --frozen-lockfile --shamefully-hoist --filter=api-cms 
 
-# Copy the full and build the project
+# Copy /full and build the project
 COPY --from=installer --chown=node:node /app/out/full/ .
 RUN pnpm build:strapi
 
-#run it - (could use CMD ["pnpm", "start:strapi"], but there might be an issue with PID and zombie process...)
-CMD ["node", "./bin/www"]
+#run it - well this is not working yet :D (could use CMD ["pnpm", "start:strapi"], but there might be an issue with PID and zombie process...)
+#CMD ["node", "./app/api/cms/dist/"]
+CMD ["pnpm", "start:strapi"]

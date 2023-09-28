@@ -56,4 +56,5 @@ COPY --from=installer --chown=node:node /app/out/full/ .
 RUN pnpm build:strapi
 
 #run it - well this is not working yet :D (could use CMD ["pnpm", "start:strapi"], but there might be an issue with PID and zombie process...)
-CMD ["node", "./bin/www"]
+#CMD ["node", "./bin/www"]
+CMD ["pnpm", "dev:strapi"]
