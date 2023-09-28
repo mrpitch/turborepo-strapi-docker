@@ -5,7 +5,7 @@ services:
       # IMPORTNAT: Watch where you are: docker compose command is started in repo root,
       # so you need to make sure you are in root for all turbo repo stuff (RUN Turbo prune ... etc.  see Dockerfile for details)
       # and for all strapi stuff in this directory (./api/cms for .env., Dockerfile, etc.)
-      env_file: .env.production
+      env_file: .env
       build:
         # here is the trick: running docker compose from monorepo root,
         # you need to set the context  back to root (this docker-compose.yaml is under ./api/cms, context: ../../. - thats where the turbo repo stuff runs)
@@ -15,7 +15,7 @@ services:
       container_name: api-cms
       restart: unless-stopped
       environment:
-        NODE_ENV: production
+        NODE_ENV: development
         DATABASE_CLIENT: postgres
         DATABASE_HOST: db
         DATABASE_PORT: 5432
@@ -26,7 +26,7 @@ services:
         - ./config:/usr/src/app/config
         - ./src:/usr/src/app/src
         - ./package.json:/usr/src/apppackage.json
-        - ./.env.production:/usr/src/app/.env.production
+        - ./.env:/usr/src/app/.env
         - ./public/uploads:/usr/src/app/public/uploads
       ports:
         - 1337:1337
@@ -38,7 +38,7 @@ services:
   db:
     container_name: api-cms-db
     image: 'postgres'
-    env_file: .env.production
+    env_file: .env
     environment:
       - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_USER=${DATABASE_USERNAME}
