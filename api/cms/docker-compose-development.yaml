@@ -5,17 +5,17 @@ services:
       # IMPORTNAT: Watch where you are: docker compose command is started in repo root,
       # so you need to make sure you are in root for all turbo repo stuff (RUN Turbo prune ... etc.  see Dockerfile for details)
       # and for all strapi stuff in this directory (./api/cms for .env., Dockerfile, etc.)
-      env_file: .env.production
+      env_file: .env
       build:
         # here is the trick: running docker compose from monorepo root,
         # you need to set the context  back to root (this docker-compose.yaml is under ./api/cms, context: ../../. - thats where the turbo repo stuff runs)
         # and the reference to Dockerfile for strapi back to this dicrectory (dockerfile: ./api/cmas/Dockerfile)
         context: ../../. 
-        dockerfile: ./api/cms/Dockerfile
-      container_name: api-cms
+        dockerfile: ./api/cms/Dockerfile.dev
+      container_name: api-cms-dev
       restart: unless-stopped
       environment:
-        NODE_ENV: production
+        NODE_ENV: development
         DATABASE_CLIENT: postgres
         DATABASE_HOST: db
         DATABASE_PORT: 5432
@@ -23,22 +23,21 @@ services:
         DATABASE_USERNAME: ${DATABASE_USERNAME}
         DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       volumes:
-        - ./config:/usr/src/app/config
-        - ./src:/usr/src/app/src
-        - ./package.json:/usr/src/apppackage.json
-        - ./.env.production:/usr/src/app/.env.production
-        - ./public/uploads:/usr/src/app/public/uploads
+        - ./config:/app/api/cms/config
+        - ./src:/app/api/cms/src
+        - ./package.json:/app/api/cms/package.json
+        - ./.env:/app/api/cms/.env
+        - ./public/uploads:/app/api/cms/public/uploads
       ports:
         - 1337:1337
       networks:
       - strapi
       depends_on:
         - db
-      command: pnpm start:strapi
   db:
-    container_name: api-cms-db
+    container_name: api-cms-db-dev
     image: 'postgres'
-    env_file: .env.production
+    env_file: .env
     environment:
       - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_USER=${DATABASE_USERNAME}
