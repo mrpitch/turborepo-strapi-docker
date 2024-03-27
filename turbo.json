@@ -8,7 +8,7 @@
     },
     "lint": {},
     "dev": {
-      "dependsOn": ["dev:strapi"],
+      "dependsOn": ["dev:strapi-sqlite"],
       "cache": false,
       "persistent": true
     },
@@ -22,6 +22,18 @@
       "outputs": ["dist/**"]
     },
     "start:strapi": {
+      "cache": true
+    },
+    "start:docker-cms": {
+      "cache": true
+    },
+    "dev:strapi-sqlite": {
+      "cache": false
+    },
+    "build:strapi-sqlite": {
+      "outputs": ["dist/**"]
+    },
+    "start:strapi-sqlite": {
       "cache": true
     }
   }

@@ -1,0 +1,32 @@
+{
+  "name": "api-cms-sqlite",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
+  "scripts": {
+    "dev:strapi-sqlite": "strapi develop",
+    "start:strapi-sqlite": "strapi start",
+    "build:strapi-sqlite": "strapi build",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@strapi/plugin-graphql": "4.6.0",
+    "@strapi/plugin-i18n": "4.6.0",
+    "@strapi/plugin-users-permissions": "4.6.0",
+    "@strapi/provider-upload-local": "4.6.0",
+    "@strapi/strapi": "4.6.0",
+    "better-sqlite3": "^8.0.1",
+    "strapi-plugin-local-image-sharp": "^1.2.1"
+  },
+  "author": {
+    "name": "A Strapi developer"
+  },
+  "strapi": {
+    "uuid": "0355bba6-96a0-42c4-81cd-3c6cccaf25fa"
+  },
+  "engines": {
+    "node": ">=14.19.1 <=18.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}
