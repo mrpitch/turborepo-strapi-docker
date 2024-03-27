@@ -42,6 +42,8 @@ RUN turbo prune --scope=api-cms --docker
 
 # copy all stuff needed from the pruned repo, install & build
 FROM base as prod
+ARG NODE_ENV=development
+ENV NODE_ENV=${NODE_ENV}
 EXPOSE 1337
 WORKDIR /app
 USER node
@@ -53,7 +55,7 @@ RUN pnpm install --prod --frozen-lockfile --shamefully-hoist --filter=api-cms
 
 # Copy the full and build the project
 COPY --from=installer --chown=node:node /app/out/full/ .
-RUN pnpm build:strapi
+RUN pnpm build:strapi:dev
 
 #run it - well this is not working yet :D (could use CMD ["pnpm", "start:strapi"], but there might be an issue with PID and zombie process...)
 #CMD ["node", "./bin/www"]

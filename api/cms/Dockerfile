@@ -42,6 +42,8 @@ RUN turbo prune --scope=api-cms --docker
 
 # copy all stuff needed from the pruned repo, install & build
 FROM base as prod
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
 EXPOSE 1337
 WORKDIR /app
 USER node
