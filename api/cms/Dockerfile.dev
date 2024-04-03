@@ -5,7 +5,7 @@
 ## ubuntu base with nodejs coppied in from official image, for a more secure base
 ###
 #cache our node version for installing later
-FROM node:18-bullseye-slim as node
+FROM node:20-bullseye-slim as node
 FROM ubuntu:focal-20230126 as base
 
 # replace npm in CMD with tini for better kernel signal handling
@@ -51,7 +51,7 @@ USER node
 COPY --chown=node:node .gitignore .gitignore
 COPY --from=installer --chown=node:node /app/out/json/ .
 COPY --from=installer --chown=node:node /app/out/pnpm*.yaml ./
-RUN pnpm install --prod --frozen-lockfile --shamefully-hoist --filter=api-cms 
+RUN pnpm install --shamefully-hoist --filter=api-cms 
 
 # Copy the full and build the project
 COPY --from=installer --chown=node:node /app/out/full/ .
@@ -59,4 +59,4 @@ RUN pnpm build:strapi:dev
 
 #run it - well this is not working yet :D (could use CMD ["pnpm", "start:strapi"], but there might be an issue with PID and zombie process...)
 #CMD ["node", "./bin/www"]
-CMD ["pnpm", "dev:strapi"]
+CMD ["pnpm", "start:strapi:dev"]

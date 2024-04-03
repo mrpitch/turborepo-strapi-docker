@@ -5,7 +5,7 @@
 ## ubuntu base with nodejs coppied in from official image, for a more secure base
 ###
 #cache our node version for installing later
-FROM node:18-bullseye-slim as node
+FROM node:20-bullseye-slim as node
 FROM ubuntu:focal-20230126 as base
 
 # replace npm in CMD with tini for better kernel signal handling
