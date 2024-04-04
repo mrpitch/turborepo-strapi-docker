@@ -8,15 +8,6 @@
 FROM node:20-bullseye-slim as node
 FROM ubuntu:focal-20230126 as base
 
-# replace npm in CMD with tini for better kernel signal handling
-# You may also need development tools to build native npm addons:
-# apt-get install gcc g++ make
-RUN apt-get update \
-    && apt-get -qq install -y --no-install-recommends \
-    tini \
-    && rm -rf /var/lib/apt/lists/*
-ENTRYPOINT ["/usr/bin/tini", "--"]
-
 # new way to get node, let's copy in the specific version we want from a docker image
 # this avoids depdency package installs (python3) that the deb package requires
 COPY --from=node /usr/local/include/ /usr/local/include/
@@ -48,15 +39,13 @@ EXPOSE 1337
 WORKDIR /app
 USER node
 # First copy & install the dependencies (as they change less often), be aware to use node user
-COPY --chown=node:node .gitignore .gitignore
 COPY --from=installer --chown=node:node /app/out/json/ .
 COPY --from=installer --chown=node:node /app/out/pnpm*.yaml ./
-RUN pnpm install --prod --frozen-lockfile --shamefully-hoist --filter=api-cms 
+RUN pnpm install --prod --filter=api-cms 
 
 # Copy /full and build the project
 COPY --from=installer --chown=node:node /app/out/full/ .
-RUN pnpm build:strapi
+RUN pnpm build:strapi:prod
 
-#run it - well this is not working yet :D (could use CMD ["pnpm", "start:strapi"], but there might be an issue with PID and zombie process...)
-#CMD ["node", "./app/api/cms/dist/"]
-CMD ["pnpm", "start:strapi"]
+#run it
+CMD ["pnpm", "start:strapi:prod"]
