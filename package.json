@@ -12,7 +12,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "nuke": "rm -r node_modules; for d in */*/node_modules; do echo $d; rm -r $d; done",
     "build:docker-cms-image": "docker build -t api-cms:v1.0 -f api/cms/Dockerfile .",
-    "build:docker-cms-dev-image": "docker build -t api-cms:v1.0 -f api/cms/Dockerfile.dev .",
+    "build:docker-cms-dev-image": "docker build -t api-cms-dev:v1.0 -f api/cms/Dockerfile.dev .",
     "dev:docker-cms": "docker compose -f api/cms/docker-compose-development.yaml --env-file api/cms/.env.development up -d",
     "prod:docker-cms": "docker compose -f api/cms/docker-compose.yaml up -d"
   },
@@ -24,8 +24,10 @@
     "turbo": "latest"
   },
   "resolutions": {
-    "@strapi/design-system": "1.11.0",
-    "@uiw/react-codemirror": "4.21.18",
+    "@strapi/strapi": "4.22.0",
+    "@strapi/admin": "4.22.0",
+    "@strapi/design-system": "1.16.0",
+    "@uiw/react-codemirror": "4.21.25",
     "codemirror": "5.65.12"
   },
   "packageManager": "pnpm@8.6.1"

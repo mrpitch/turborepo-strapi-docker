@@ -12,7 +12,7 @@ services:
         # and the reference to Dockerfile for strapi back to this dicrectory (dockerfile: ./api/cmas/Dockerfile)
         context: ../../. 
         dockerfile: ./api/cms/Dockerfile.dev
-      container_name: api-cms-dev
+      container_name: api-cms-dev_v1.0
       restart: unless-stopped
       environment:
         NODE_ENV: development
@@ -36,15 +36,15 @@ services:
         - db
   db:
     container_name: api-cms-db-dev
-    image: 'postgres'
+    image: 'postgres:15.1'
     env_file: .env.development
     environment:
       - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_USER=${DATABASE_USERNAME}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      #- db_data:/var/lib/postgresql/data/
-      - ./database/db_strapi_latest.sql.gz:/docker-entrypoint-initdb.d/db_strapi_latest.sql.gz
+      - db_data:/var/lib/postgresql/data/
+      #- ./database/db_strapi_latest.sql.gz:/docker-entrypoint-initdb.d/db_strapi_latest.sql.gz
     ports:
       - "5432:5432"
     networks:
