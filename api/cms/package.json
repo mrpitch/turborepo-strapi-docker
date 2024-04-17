@@ -1,22 +1,31 @@
 {
   "name": "api-cms",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Strapi application",
   "scripts": {
-    "dev:strapi": "strapi develop",
-    "start:strapi": "strapi start",
-    "build:strapi": "strapi build",
+    "dev:strapi": "ENV_PATH=.env.development strapi develop",
+    "build:strapi:dev": "ENV_PATH=.env.development strapi build",
+    "start:strapi:prod": "ENV_PATH=.env.prodution NODE_ENV=production strapi start",
+    "build:strapi:prod": "ENV_PATH=.env.prodution NODE_ENV=production strapi build",
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-graphql": "4.6.0",
-    "@strapi/plugin-i18n": "4.6.0",
-    "@strapi/plugin-users-permissions": "4.6.0",
-    "@strapi/provider-upload-local": "4.6.0",
-    "@strapi/strapi": "4.6.0",
-    "pg": "^8.9.0",
-    "strapi-plugin-local-image-sharp": "^1.2.1"
+    "@strapi/plugin-graphql": "^4.22.0",
+    "@strapi/plugin-i18n": "4.22.0",
+    "@strapi/plugin-seo": "^1.9.8",
+    "@strapi/plugin-users-permissions": "4.22.0",
+    "@strapi/provider-upload-local": "4.22.0",
+    "@strapi/strapi": "4.22.0",
+    "pg": "8.8.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "5.3.4",
+    "strapi-plugin-local-image-sharp": "^1.7.0",
+    "strapi-plugin-migrations": "^1.0.5",
+    "strapi-plugin-preview-button": "^2.2.2",
+    "strapi-plugin-transformer": "^3.1.2",
+    "styled-components": "5.3.3"
   },
   "author": {
     "name": "A Strapi developer"
@@ -25,8 +34,7 @@
     "uuid": "0355bba6-96a0-42c4-81cd-3c6cccaf25fa"
   },
   "engines": {
-    "node": ">=14.19.1 <=18.x.x",
-    "npm": ">=6.0.0"
+    "node": ">=18.x.x <=20.x.x"
   },
   "license": "MIT"
 }

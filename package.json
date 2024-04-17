@@ -4,15 +4,17 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "build:strapi": "turbo run build:strapi",
-    "start:strapi": "turbo run start:strapi",
-    "dev:strapi": "turbo run dev:strapi",
-    "dev:strapi-sqlite": "turbo run dev:strapi-sqlite",
+    "build:strapi:dev": "pnpm --filter=api-cms build:strapi:dev",
+    "start:strapi:dev": "pnpm --filter=api-cms dev:strapi",
+    "build:strapi:prod": "turbo run build:strapi:dev",
+    "start:strapi:prod": "turbo run start:strapi",
     "clean": "turbo run clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "nuke": "rm -r node_modules; for d in */*/node_modules; do echo $d; rm -r $d; done",
-    "build:docker-cms": "docker build -t api-cms:v1.0 -f api/cms/Dockerfile .",
-    "start:docker-cms": "docker compose -f api/cms/docker-compose-development.yaml up"
+    "build:docker-cms-image": "docker build -t api-cms:v1.0 -f api/cms/Dockerfile .",
+    "build:docker-cms-dev-image": "docker build -t api-cms-dev:v1.0 -f api/cms/Dockerfile.dev .",
+    "dev:docker-cms": "docker compose -f api/cms/docker-compose-development.yaml --env-file api/cms/.env.development up -d",
+    "prod:docker-cms": "docker compose -f api/cms/docker-compose.yaml up -d"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
@@ -20,6 +22,13 @@
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.11",
     "turbo": "latest"
+  },
+  "resolutions": {
+    "@strapi/strapi": "4.22.0",
+    "@strapi/admin": "4.22.0",
+    "@strapi/design-system": "1.16.0",
+    "@uiw/react-codemirror": "4.21.25",
+    "codemirror": "5.65.12"
   },
   "packageManager": "pnpm@8.6.1"
 }
